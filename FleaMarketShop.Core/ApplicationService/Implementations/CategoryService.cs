@@ -4,29 +4,29 @@ using FleaMarketShop.Core.Entities;
 
 namespace FleaMarketShop.Core.ApplicationService.Implementations
 {
-    public class ProductService : IProductService
+    public class CategoryService : ICategoryService
     {
-        public Product CreateProduct(Product product)
+        public Category CreateCategory(Category category)
         {
             throw new NotImplementedException();
         }
 
-        public Product DeleteProduct(int productId)
+        public Category DeleteCategory(int categoryId)
         {
             throw new NotImplementedException();
         }
 
-        public List<Product> GetAllProducts()
+        public List<Category> GetAllCategories()
         {
             throw new NotImplementedException();
         }
 
-        public Product GetProductById(int productId)
+        public Category GetCategoryById(int categoryId)
         {
             throw new NotImplementedException();
         }
 
-        public Product UpdateProduct(Product productUpdate)
+        public Category UpdateCategory(Category categoryUpdate)
         {
             throw new NotImplementedException();
         }
