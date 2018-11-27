@@ -90,15 +90,29 @@ namespace FleaMarketShopRestApi
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                using(var scope = app.ApplicationServices.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<FleaMarketShopContext>();
+                    DbInitializer.SeedDb(ctx);
+                }
             }
             else
             {
+                using (var scope = app.ApplicationServices.CreateScope())
+                {
+                    var ctx = scope.ServiceProvider.GetService<FleaMarketShopContext>();
+                    ctx.Database.EnsureCreated();
+                }
                 app.UseHsts();
             }
 
+            app.UseCors("AllowAllOrigins");
+           
+            //app.UseAuthentication();
             app.UseHttpsRedirection();
             app.UseMvc();
         }
