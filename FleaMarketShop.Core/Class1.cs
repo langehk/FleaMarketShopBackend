@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace FleaMarketShop
+namespace FleaMarketShop.Core
 {
     public class Class1
     {
