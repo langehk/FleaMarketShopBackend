@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleaMarketShop.Core", "Flea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleaMarketShop.Core.Entities", "FleaMarketShop.Core\FleaMarketShop.Core.Entities\FleaMarketShop.Core.Entities.csproj", "{A66AA0F4-C728-4C32-9C8E-A47B9B320A72}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleaMarketShopRestApi", "FleaMarketShopRestApi\FleaMarketShopRestApi.csproj", "{4B0DCFF5-58FA-49F1-A817-3B1B57446613}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,6 +27,10 @@ Global
 		{A66AA0F4-C728-4C32-9C8E-A47B9B320A72}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A66AA0F4-C728-4C32-9C8E-A47B9B320A72}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A66AA0F4-C728-4C32-9C8E-A47B9B320A72}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B0DCFF5-58FA-49F1-A817-3B1B57446613}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B0DCFF5-58FA-49F1-A817-3B1B57446613}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B0DCFF5-58FA-49F1-A817-3B1B57446613}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B0DCFF5-58FA-49F1-A817-3B1B57446613}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{6F451964-C018-45D8-8F24-5707CB85CC50} = {DA8F41F0-ADC2-4654-BB31-4914B0305292}
