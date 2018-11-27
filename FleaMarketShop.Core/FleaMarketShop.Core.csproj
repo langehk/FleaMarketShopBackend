@@ -3,14 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="FleaMarketShop.Core.Entities\Class1.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="FleaMarketShop.Core.Entities\obj\Debug\netstandard2.0\FleaMarketShop.Core.Entities.assets.cache" />
-    <None Remove="FleaMarketShop.Core.Entities\obj\Debug\netcoreapp2.1\FleaMarketShop.Core.Entities.assets.cache" />
-  </ItemGroup>
   <ItemGroup>
     <Folder Include="ApplicationService\" />
     <Folder Include="DomainService\" />
