@@ -26,6 +26,11 @@ namespace FleaMarketShop.Core.ApplicationService.Implementations
             throw new NotImplementedException();
         }
 
+        public Category GetCategoryByIdIncludeProducts(int categoryId)
+        {
+            throw new NotImplementedException();
+        }
+
         public Category UpdateCategory(Category categoryUpdate)
         {
             throw new NotImplementedException();
