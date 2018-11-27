@@ -9,6 +9,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{9EAAF51F-58F1-46C9-A24D-7AFDE67993F0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleaMarketShop.Core", "FleaMarketShop.Core\FleaMarketShop.Core.csproj", "{6F451964-C018-45D8-8F24-5707CB85CC50}"
+	ProjectSection(ProjectDependencies) = postProject
+		{95800326-EA3B-4C32-AE37-1D665C7E7168} = {95800326-EA3B-4C32-AE37-1D665C7E7168}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleaMarketShopRestApi", "FleaMarketShopRestApi\FleaMarketShopRestApi.csproj", "{4B0DCFF5-58FA-49F1-A817-3B1B57446613}"
 EndProject
