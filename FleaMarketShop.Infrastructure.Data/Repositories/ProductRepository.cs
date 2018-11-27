@@ -7,14 +7,28 @@ namespace FleaMarketShop.Infrastructure.Data.Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        public Product CreateProduct(Product product)
+        private readonly FleaMarketShopContext _ctx;
+
+        public ProductRepository(FleaMarketShopContext ctx)
         {
-            throw new NotImplementedException();
+            _ctx = ctx;
         }
 
+        // Creates a product
+        public Product CreateProduct(Product product)
+        {
+            if (product.Categories != null) _ctx.Attach(product.Categories);
+            var _product = _ctx.Products.Add(product).Entity;
+            _ctx.SaveChanges();
+            return _product;
+        }
+
+        // Deletes a product
         public Product DeleteProduct(int productId)
         {
-            throw new NotImplementedException();
+            var productDelete = _ctx.Remove(new Product {ProductId = productId}).Entity;
+            _ctx.SaveChanges();
+            return productDelete;
         }
 
         public IEnumerable<Product> GetAllProducts()
