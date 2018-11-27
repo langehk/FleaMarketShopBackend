@@ -8,7 +8,4 @@
     <Folder Include="DomainService\" />
     <Folder Include="ApplicationService\Implementations\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="FleaMarketShop.Core.Entities\FleaMarketShop.Core.Entities.csproj" />
-  </ItemGroup>
 </Project>
