@@ -4,7 +4,7 @@ using FleaMarketShop.Core.Entities;
 
 namespace FleaMarketShop.Core.ApplicationService
 {
-    public interface ICategoryService 
+    public interface ICategoryService
     {
         Category CreateCategory(Category category);
 
@@ -15,6 +15,8 @@ namespace FleaMarketShop.Core.ApplicationService
         List<Category> GetAllCategories();
 
         Category GetCategoryById(int categoryId);
+
+        Category GetCategoryByIdIncludeProducts(int categoryId);
 
     }
 }

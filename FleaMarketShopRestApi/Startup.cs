@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FleaMarketShop.Core.ApplicationService;
+using FleaMarketShop.Core.ApplicationService.Implementations;
 using FleaMarketShop.Core.DomainService;
 using FleaMarketShop.Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
@@ -17,25 +19,56 @@ namespace FleaMarketShopRestApi
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+
+        private IConfiguration _conf { get; }
+
+        private IHostingEnvironment _env { get; set; }
+
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+            _env = env;
+
+            var builder = new ConfigurationBuilder()
+
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddEnvironmentVariables();
+                _conf = builder.Build();
         }
-
-        public IConfiguration Configuration { get; }
-
 
 
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+            services.AddCors();
+
+            // Allows all headers + methods 
+            services.AddCors(Options =>
+            {
+            Options.AddPolicy("AllowAllOrigins",
+                  builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+            });
+
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
+
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<ICategoryService, CategoryService>();
+
+
+            services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductRepository, ProductRepository>();
 
 
+            // Ensures that rerferences wont loop. "Reference loop handling"
+            services.AddMvc().AddJsonOptions(Options =>
+            {
+                Options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
         }
 
 
