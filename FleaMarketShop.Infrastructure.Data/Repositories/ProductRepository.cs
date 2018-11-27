@@ -7,27 +7,27 @@ namespace FleaMarketShop.Infrastructure.Data.Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        public Category CreateProduct(Category product)
+        public Product CreateProduct(Product product)
         {
             throw new NotImplementedException();
         }
 
-        public Category DeleteProduct(int productId)
+        public Product DeleteProduct(int productId)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<Category> GetAllProducts()
+        public IEnumerable<Product> GetAllProducts()
         {
             throw new NotImplementedException();
         }
 
-        public Category GetProductById(int productId)
+        public Product GetProductById(int productId)
         {
             throw new NotImplementedException();
         }
 
-        public Category UpdateProduct(Category productUpdate)
+        public Product UpdateProduct(Product productUpdate)
         {
             throw new NotImplementedException();
         }

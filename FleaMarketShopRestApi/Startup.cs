@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using FleaMarketShop.Core.ApplicationService;
 using FleaMarketShop.Core.ApplicationService.Implementations;
 using FleaMarketShop.Core.DomainService;
+using FleaMarketShop.Infrastructure.Data;
 using FleaMarketShop.Infrastructure.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -69,10 +71,20 @@ namespace FleaMarketShopRestApi
             {
                 Options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
+
+
+            if (_env.IsDevelopment())
+            {
+                services.AddDbContext<FleaMarketShopContext>(
+                    opt => opt.UseSqlite("Date source=FleaMarketShop.db"));
+                
+            }
+            else 
+            {
+                services.AddDbContext<FleaMarketShopContext>(
+                    opt => opt.UseSqlServer(_conf.GetConnectionString("defaultConnection")));
+            }
         }
-
-
-
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
