@@ -8,8 +8,11 @@ namespace FleaMarketShop.Core.DomainService
     {
         IEnumerable<User> GetAllUsers();
         User GetUserById(long userId);
-        User AddUser(User user);
-        User EditUser(User user);
-        User DeleteUser(long userId);
+      
+
+        //Void grundet vi ikke returner i vores UserRepository.
+        void EditUser(User user);
+        void DeleteUser(long userId);
+        void AddUser(User user);
     }
 }

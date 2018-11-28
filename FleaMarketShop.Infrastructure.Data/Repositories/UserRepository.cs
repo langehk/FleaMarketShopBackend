@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FleaMarketShop.Core.DomainService;
 using FleaMarketShop.Core.Entities;
 
@@ -7,29 +8,45 @@ namespace FleaMarketShop.Infrastructure.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public User AddUser(User user)
+        private readonly FleaMarketShopContext _ctx;
+
+        public UserRepository(FleaMarketShopContext ctx)
         {
-            throw new NotImplementedException();
+            _ctx = ctx;
         }
 
-        public User DeleteUser(long userId)
+        //Creates a new user //void, doesn't return a user.
+        public void AddUser(User user)
         {
-            throw new NotImplementedException();
+            var _user = _ctx.Users.Add(user).Entity;
+            _ctx.SaveChanges();
+
         }
 
-        public User EditUser(User user)
+        //Deletes a user  //void, dosen't return a user
+        public void DeleteUser(long userId)
         {
-            throw new NotImplementedException();
-        }
+            var userDelete = _ctx.Users.FirstOrDefault(u => u.UserId == userId);
+            _ctx.Users.Remove(userDelete);
+            _ctx.SaveChanges();
 
+        }
+        //Update a user //void, doesn't return a user
+        public void EditUser(User user)
+        {
+            var _userEdit = _ctx.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _ctx.SaveChanges();
+
+        }
+        //Return all users
         public IEnumerable<User> GetAllUsers()
         {
-            throw new NotImplementedException();
+            return _ctx.Users;
         }
-
+        //Return the user by id
         public User GetUserById(long userId)
         {
-            throw new NotImplementedException();
+            return _ctx.Users.FirstOrDefault(u => u.UserId == userId);
         }
     }
 }
