@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FleaMarketShop.Core.DomainService;
 using FleaMarketShop.Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace FleaMarketShop.Infrastructure.Data.Repositories
 {
@@ -30,20 +32,31 @@ namespace FleaMarketShop.Infrastructure.Data.Repositories
             _ctx.SaveChanges();
             return productDelete;
         }
-
+        //Returns all products
         public IEnumerable<Product> GetAllProducts()
         {
-            throw new NotImplementedException();
+            return _ctx.Products;
         }
-
+        //Get the product by id
         public Product GetProductById(int productId)
         {
-            throw new NotImplementedException();
+            return _ctx.Products.FirstOrDefault(p => p.ProductId == productId);
         }
 
+        //Get the product by id, and includes the category.
+        public Product GetProductByIdIncludeCategory(int productId)
+        {
+            return _ctx.Products
+                       .Include(p => p.Categories)
+                       .FirstOrDefault(p => p.ProductId == productId);
+        }
+
+        //update product
         public Product UpdateProduct(Product productUpdate)
         {
-            throw new NotImplementedException();
+            _ctx.Attach(productUpdate).State = EntityState.Modified;
+            _ctx.SaveChanges();
+            return productUpdate;
         }
     }
 }
