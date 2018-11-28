@@ -1,39 +1,48 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using FleaMarketShop.Core.DomainService;
 using FleaMarketShop.Core.Entities;
 
 namespace FleaMarketShop.Core.ApplicationService.Implementations
 {
     public class ProductService : IProductService
     {
+        private readonly IProductRepository _productRepository;
+
+        public ProductService(IProductRepository productRepository)
+        {
+            _productRepository = productRepository;
+        }
+
         public Product CreateProduct(Product product)
         {
-            throw new NotImplementedException();
+            return _productRepository.CreateProduct(product);
         }
 
         public Product DeleteProduct(int productId)
         {
-            throw new NotImplementedException();
+            return _productRepository.DeleteProduct(productId);
         }
 
         public List<Product> GetAllProducts()
         {
-            throw new NotImplementedException();
+            return _productRepository.GetAllProducts().ToList();
         }
 
         public Product GetProductById(int productId)
         {
-            throw new NotImplementedException();
+            return _productRepository.GetProductById(productId);
         }
 
         public Product GetProductByIdIncludeCategory(int productId)
         {
-            throw new NotImplementedException();
+            return _productRepository.GetProductByIdIncludeCategory(productId);
         }
 
         public Product UpdateProduct(Product productUpdate)
         {
-            throw new NotImplementedException();
+            return _productRepository.UpdateProduct(productUpdate);
         }
     }
 }

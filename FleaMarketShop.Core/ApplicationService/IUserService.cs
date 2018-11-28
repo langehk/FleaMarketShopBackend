@@ -10,10 +10,10 @@ namespace FleaMarketShop.Core.ApplicationService
 
         User GetUserById(long userId);
 
-        User AddUser(User user);
+        void AddUser(User user);
 
-        User EditUser(User user);
+        void EditUser(User user);
 
-        User DeleteUser(long userId);
+        void DeleteUser(long userId);
     }
 }

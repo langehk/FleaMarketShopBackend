@@ -1,34 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using FleaMarketShop.Core.DomainService;
 using FleaMarketShop.Core.Entities;
 
 namespace FleaMarketShop.Core.ApplicationService.Implementations
 {
     public class UserService : IUserService
     {
-        public User AddUser(User user)
+
+        private readonly IUserRepository _userRepository;
+
+        public UserService(IUserRepository userRepository)
         {
-            throw new NotImplementedException();
+            _userRepository = userRepository;
         }
 
-        public User DeleteUser(long userId)
+        public void AddUser(User user)
         {
-            throw new NotImplementedException();
+             _userRepository.AddUser(user);
         }
 
-        public User EditUser(User user)
+        public void DeleteUser(long userId)
         {
-            throw new NotImplementedException();
+            _userRepository.DeleteUser(userId);
+        }
+
+        public void EditUser(User user)
+        {
+            _userRepository.EditUser(user);
         }
 
         public IEnumerable<User> GetAllUsers()
         {
-            throw new NotImplementedException();
+            return _userRepository.GetAllUsers().ToList();
         }
 
         public User GetUserById(long userId)
         {
-            throw new NotImplementedException();
+            return _userRepository.GetUserById(userId);
         }
     }
 }
