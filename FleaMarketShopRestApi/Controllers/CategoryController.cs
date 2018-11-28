@@ -24,33 +24,35 @@ namespace FleaMarketShopRestApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Category>> Get()
         {
-            return _categoryService.GetAllCategories().ToList();
-            //get all
+            return _categoryService.GetAllCategories().ToList();        
         }
 
-        // GET api/values/5
+        // GET api/category/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult<Category> Get(int id)
         {
-            return "value";
+            return _categoryService.GetCategoryById(id);
         }
 
-        // POST api/values
+        // POST api/category
         [HttpPost]
-        public void Post([FromBody]string value)
+        public ActionResult<Category> Post([FromBody]Category category)
         {
+            return _categoryService.CreateCategory(category);
         }
 
-        // PUT api/values/5
+        // PUT api/category/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public ActionResult<Category> Put(int id, [FromBody] Category category)
         {
+            return _categoryService.UpdateCategory(category);
         }
 
-        // DELETE api/values/5
+        // DELETE api/category/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<Category> Delete(int id)
         {
+           return _categoryService.DeleteCategory(id);
         }
     }
 }
