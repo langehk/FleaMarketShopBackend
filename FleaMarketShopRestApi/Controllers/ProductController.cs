@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FleaMarketShop.Core.ApplicationService;
+using FleaMarketShop.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -9,38 +11,50 @@ using Microsoft.AspNetCore.Mvc;
 namespace FleaMarketShopRestApi.Controllers
 {
     [Route("api/[controller]")]
+
     public class ProductController : Controller
     {
-        // GET: api/values
+
+        private readonly IProductService _productService;
+
+        public ProductController(IProductService productService)
+        {
+            _productService = productService;
+        }
+
+        // GET: api/product
         [HttpGet]
-        public IEnumerable<string> Get()
+        public ActionResult<IEnumerable<Product>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return _productService.GetAllProducts().ToList();
         }
 
-        // GET api/values/5
+        // GET api/product/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public ActionResult<Product> Get(int id)
         {
-            return "value";
+            return _productService.GetProductById(id);
         }
 
-        // POST api/values
+        // POST api/product
         [HttpPost]
-        public void Post([FromBody]string value)
+        public ActionResult<Product> Post([FromBody]Product product)
         {
+            return _productService.CreateProduct(product);
         }
 
-        // PUT api/values/5
+        // PUT api/product/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public ActionResult<Product> Put(int id, [FromBody]Product product)
         {
+            return _productService.UpdateProduct(product);
         }
 
-        // DELETE api/values/5
+        // DELETE api/product/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<Product> Delete(int id)
         {
+            return _productService.DeleteProduct(id);
         }
     }
 }
