@@ -20,7 +20,7 @@ namespace FleaMarketShop.Infrastructure.Data.Repositories
         // Creates a category
         public Category CreateCategory(Category category)
         {
-            if (category.Products != null) _ctx.Attach(category.Products);
+            //if (category.Products != null) _ctx.Attach(category.Products);
             var _category = _ctx.Categories.Add(category).Entity;
             _ctx.SaveChanges();
             return _category;
@@ -49,7 +49,7 @@ namespace FleaMarketShop.Infrastructure.Data.Repositories
         public Category GetCategoryByIdIncludeProducts(int categoryId)
         {
             return _ctx.Categories
-                       .Include(c => c.Products)
+                       //.Include(c => c.Products)
                        .FirstOrDefault(c => c.CategoryId == categoryId);
         }
         //Update category

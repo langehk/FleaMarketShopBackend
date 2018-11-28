@@ -19,7 +19,7 @@ namespace FleaMarketShop.Infrastructure.Data.Repositories
         // Creates a product
         public Product CreateProduct(Product product)
         {
-            if (product.Categories != null) _ctx.Attach(product.Categories);
+            //if (product.Categories != null) _ctx.Attach(product.Categories);
             var _product = _ctx.Products.Add(product).Entity;
             _ctx.SaveChanges();
             return _product;
@@ -47,7 +47,7 @@ namespace FleaMarketShop.Infrastructure.Data.Repositories
         public Product GetProductByIdIncludeCategory(int productId)
         {
             return _ctx.Products
-                       .Include(p => p.Categories)
+                       //.Include(p => p.Categories)
                        .FirstOrDefault(p => p.ProductId == productId);
         }
 

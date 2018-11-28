@@ -78,7 +78,7 @@ namespace FleaMarketShopRestApi
             if (_env.IsDevelopment())
             {
                 services.AddDbContext<FleaMarketShopContext>(
-                    opt => opt.UseSqlite("Date source=FleaMarketShop.db"));
+                    opt => opt.UseSqlite("Data source=FleaMarketShop.db"));
                 
             }
             else 
