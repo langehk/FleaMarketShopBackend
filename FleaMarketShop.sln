@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleaMarketShop.Infrastructu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleaMarketShop.Core.Entities", "FleaMarketShop.Core.Entities\FleaMarketShop.Core.Entities.csproj", "{95800326-EA3B-4C32-AE37-1D665C7E7168}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{63C89D7F-2B6F-4840-89DB-A155445AB830}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
