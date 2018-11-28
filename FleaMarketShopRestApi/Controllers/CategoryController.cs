@@ -22,7 +22,7 @@ namespace FleaMarketShopRestApi.Controllers
             _categoryService = categoryService;
         }
 
-        // GET: api/categories
+        // GET: api/category
         [HttpGet]
         public ActionResult<IEnumerable<Category>> Get()
         {
