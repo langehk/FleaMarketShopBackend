@@ -6,8 +6,6 @@ using FleaMarketShop.Core.ApplicationService;
 using FleaMarketShop.Core.Entities;
 using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
 namespace FleaMarketShopRestApi.Controllers
 {
     
@@ -27,6 +25,7 @@ namespace FleaMarketShopRestApi.Controllers
         public ActionResult<IEnumerable<Category>> Get()
         {
             return _categoryService.GetAllCategories().ToList();
+            //get all
         }
 
         // GET api/values/5
