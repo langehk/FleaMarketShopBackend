@@ -115,7 +115,7 @@ namespace FleaMarketShopRestApi
             app.UseCors("AllowAllOrigins");
            
             //app.UseAuthentication();
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
