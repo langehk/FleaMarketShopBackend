@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using FleaMarketShop.Core.Entities;
 using Microsoft.EntityFrameworkCore.Internal;
 
-
 namespace FleaMarketShop.Infrastructure.Data
 {
     public class DbInitializer : IDbInitializer

@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FleaMarketShop.Core.Entities;
+﻿using FleaMarketShop.Core.Entities;
 
-namespace FleaMarketShopRestApi.Helpers
+namespace FleaMarketShop.Infrastructure.Data
 {
     public interface IAuthenticationHelper
     {

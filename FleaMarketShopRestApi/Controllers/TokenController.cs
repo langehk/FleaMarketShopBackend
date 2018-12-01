@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using FleaMarketShop.Core.ApplicationService;
 using FleaMarketShop.Core.DomainService;
 using FleaMarketShop.Core.Entities;
+using FleaMarketShop.Infrastructure.Data;
 using FleaMarketShopRestApi.Helpers;
 using FleaMarketShopRestApi.Models;
 using Microsoft.AspNetCore.Mvc;

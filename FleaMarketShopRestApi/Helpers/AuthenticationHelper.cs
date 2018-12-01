@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Collections.Generic;
 using FleaMarketShop.Core.Entities;
+using FleaMarketShop.Infrastructure.Data;
 
 namespace FleaMarketShopRestApi.Helpers
 {
