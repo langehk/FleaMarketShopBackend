@@ -1,17 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 using FleaMarketShop.Core.Entities;
+using Microsoft.EntityFrameworkCore.Internal;
+
 
 namespace FleaMarketShop.Infrastructure.Data
 {
-    public class DbInitializer
+    public class DbInitializer : IDbInitializer
     {
-        public static void SeedDb(FleaMarketShopContext ctx)
+
+        private IAuthenticationHelper authenticationHelper;
+
+        public DbInitializer(IAuthenticationHelper authHelper)
+        {
+            authenticationHelper = authHelper;
+        }
+
+        public void Initialize(FleaMarketShopContext ctx)
         {
 
             //make sure that the enviroment database is deleted and created.
-            ctx.Database.EnsureDeleted();
+            //ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
 
+            if (ctx.Products.Any() || ctx.Categories.Any())
+            {
+                return;
+            }
 
             var product1 = ctx.Products.Add(new Product
             {
@@ -39,18 +54,30 @@ namespace FleaMarketShop.Infrastructure.Data
                 CategoryName = "Have"
             }).Entity;
 
+            // Create two users with hashed and salted passwords
+            string password = "1234";
+            byte[] passwordHashJoe, passwordSaltJoe, passwordHashAnn, passwordSaltAnn;
+            authenticationHelper.CreatePasswordHash(password, out passwordHashJoe, out passwordSaltJoe);
+            authenticationHelper.CreatePasswordHash(password, out passwordHashAnn, out passwordSaltAnn);
 
-            var user1 = ctx.Users.Add(new User
+            List<User> users = new List<User>
             {
-                UserName = "AdminUser"
-                //PasswordHash = passwordHashUser,
-                //PasswordSalt = passwordSaltUser,
-                //IsAdmin = true
-            }).Entity;
+                new User {
+                    UserName = "UserJoe",
+                    PasswordHash = passwordHashJoe,
+                    PasswordSalt = passwordSaltJoe,
+                    IsAdmin = false
+                },
+                new User {
+                    UserName = "AdminAnn",
+                    PasswordHash = passwordHashAnn,
+                    PasswordSalt = passwordSaltAnn,
+                    IsAdmin = true
+                }
+            };
 
+            ctx.Users.AddRange(users);
             ctx.SaveChanges();
         }
-
-
     }
 }
