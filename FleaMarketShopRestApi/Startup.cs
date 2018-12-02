@@ -103,7 +103,7 @@ namespace FleaMarketShopRestApi
             }
 
             // Register database initializer
-            services.AddTransient<IDbInitializer, IDbInitializer>();
+            services.AddTransient<IDbInitializer, DbInitializer>();
 
             // Register the AuthenticationHelper in the helpers folder for dependency
             // injection. It must be registered as a singleton service. The AuthenticationHelper
