@@ -18,8 +18,8 @@ namespace FleaMarketShop.Infrastructure.Data
         public void Initialize(FleaMarketShopContext ctx)
         {
 
-            //make sure that the enviroment database is deleted and created.
-            //ctx.Database.EnsureDeleted();
+            //make sure that the environment database is deleted and created.
+            ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
 
             if (ctx.Products.Any() || ctx.Categories.Any())
