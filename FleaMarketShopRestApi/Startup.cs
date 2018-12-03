@@ -1,21 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using FleaMarketShop.Core.ApplicationService;
 using FleaMarketShop.Core.ApplicationService.Implementations;
 using FleaMarketShop.Core.DomainService;
 using FleaMarketShop.Infrastructure.Data;
 using FleaMarketShop.Infrastructure.Data.Repositories;
+using FleaMarketShopRestApi.Helpers;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FleaMarketShopRestApi
 {
@@ -44,13 +41,31 @@ namespace FleaMarketShopRestApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
+            Byte[] secretBytes = new byte[40];
+            Random rand = new Random();
+            rand.NextBytes(secretBytes);
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateAudience = false,
+                    //ValidAudience = "TodoApiClient",
+                    ValidateIssuer = false,
+                    //ValidIssuer = "TodoApi",
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(secretBytes),
+                    ValidateLifetime = true, //validate the expiration and not before values in the token
+                    ClockSkew = TimeSpan.FromMinutes(5) //5 minute tolerance for the expiration date
+                };
+            });
+
             services.AddCors();
 
             // Allows all headers + methods 
-            services.AddCors(Options =>
+            services.AddCors(options =>
             {
-            Options.AddPolicy("AllowAllOrigins",
+            options.AddPolicy("AllowAllOrigins",
                   builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
 
@@ -68,10 +83,10 @@ namespace FleaMarketShopRestApi
             services.AddScoped<IProductRepository, ProductRepository>();
 
 
-            // Ensures that rerferences wont loop. "Reference loop handling"
-            services.AddMvc().AddJsonOptions(Options =>
+            // Ensures that references wont loop. "Reference loop handling"
+            services.AddMvc().AddJsonOptions(options =>
             {
-                Options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
             });
 
 
@@ -86,20 +101,42 @@ namespace FleaMarketShopRestApi
                 services.AddDbContext<FleaMarketShopContext>(
                     opt => opt.UseSqlServer(_conf.GetConnectionString("defaultConnection")));
             }
+
+            // Register database initializer
+            services.AddTransient<IDbInitializer, DbInitializer>();
+
+            // Register the AuthenticationHelper in the helpers folder for dependency
+            // injection. It must be registered as a singleton service. The AuthenticationHelper
+            // is instantiated with a parameter. The parameter is the previously created
+            // "secretBytes" array, which is used to generate a key for signing JWT tokens,
+            services.AddSingleton<IAuthenticationHelper>(new AuthenticationHelper(secretBytes));
         }
 
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // Initialize the database and the AuthenticationHelper.
+            using (var scope = app.ApplicationServices.CreateScope())
+            {
+                // Initialize the database
+                var services = scope.ServiceProvider;
+                var dbContext = services.GetService<FleaMarketShopContext>();
+                var dbInitializer = services.GetService<IDbInitializer>();
+                dbInitializer.Initialize(dbContext);
+            }
+
+            // For convenience, I want detailed exception information always. However, this statement should
+            // be removed, when the application is released.
+            app.UseDeveloperExceptionPage();
+
 
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 using(var scope = app.ApplicationServices.CreateScope())
                 {
-                    var ctx = scope.ServiceProvider.GetService<FleaMarketShopContext>();
-                    DbInitializer.SeedDb(ctx);
+                    var ctx = scope.ServiceProvider.GetService<FleaMarketShopContext>();                   
                 }
             }
             else
@@ -114,7 +151,7 @@ namespace FleaMarketShopRestApi
 
             app.UseCors("AllowAllOrigins");
            
-            //app.UseAuthentication();
+            app.UseAuthentication();
             //app.UseHttpsRedirection();
             app.UseMvc();
         }

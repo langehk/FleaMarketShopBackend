@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using FleaMarketShop.Core.ApplicationService;
 using FleaMarketShop.Core.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FleaMarketShopRestApi.Controllers
@@ -28,6 +29,7 @@ namespace FleaMarketShopRestApi.Controllers
         }
 
         // GET api/product/5
+        [Authorize]
         [HttpGet("{id}")]
         public ActionResult<Product> Get(int id)
         {
@@ -35,6 +37,7 @@ namespace FleaMarketShopRestApi.Controllers
         }
 
         // POST api/product
+        [Authorize(Roles = "Administrator")]
         [HttpPost]
         public ActionResult<Product> Post([FromBody]Product product)
         {
@@ -42,6 +45,7 @@ namespace FleaMarketShopRestApi.Controllers
         }
 
         // PUT api/product/5
+        [Authorize(Roles = "Administrator")]
         [HttpPut("{id}")]
         public ActionResult<Product> Put(int id, [FromBody]Product product)
         {
@@ -49,6 +53,7 @@ namespace FleaMarketShopRestApi.Controllers
         }
 
         // DELETE api/product/5
+        [Authorize(Roles = "Administrator")]
         [HttpDelete("{id}")]
         public ActionResult<Product> Delete(int id)
         {
