@@ -139,10 +139,10 @@ namespace FleaMarketShopRestApi
                 app.UseHsts();
             }
 
+            app.UseHttpsRedirection();
+            //app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseCors("AllowAllOrigins");
-           
             app.UseAuthentication();
-            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }
