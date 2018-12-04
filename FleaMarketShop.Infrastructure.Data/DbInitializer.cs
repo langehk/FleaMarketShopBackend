@@ -19,10 +19,10 @@ namespace FleaMarketShop.Infrastructure.Data
         {
 
             //make sure that the environment database is deleted and created.
-           // ctx.Database.EnsureDeleted();
+            //ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
 
-            if (ctx.Products.Any() || ctx.Categories.Any())
+            if (ctx.Products.Any() || ctx.Categories.Any() || ctx.Users.Any())
             {
                 return;
             }
