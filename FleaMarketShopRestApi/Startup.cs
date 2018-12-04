@@ -130,22 +130,12 @@ namespace FleaMarketShopRestApi
             // be removed, when the application is released.
             app.UseDeveloperExceptionPage();
 
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                using(var scope = app.ApplicationServices.CreateScope())
-                {
-                    var ctx = scope.ServiceProvider.GetService<FleaMarketShopContext>();                   
-                }
             }
             else
             {
-                using (var scope = app.ApplicationServices.CreateScope())
-                {
-                    var ctx = scope.ServiceProvider.GetService<FleaMarketShopContext>();
-                    ctx.Database.EnsureCreated();
-                }
                 app.UseHsts();
             }
 
