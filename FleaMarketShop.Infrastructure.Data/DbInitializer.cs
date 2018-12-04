@@ -19,6 +19,7 @@ namespace FleaMarketShop.Infrastructure.Data
         {
 
             //make sure that the environment database is deleted and created.
+
             ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
 
@@ -78,5 +79,7 @@ namespace FleaMarketShop.Infrastructure.Data
             ctx.Users.AddRange(users);
             ctx.SaveChanges();
         }
+
+
     }
 }
