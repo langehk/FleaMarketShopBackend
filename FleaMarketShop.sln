@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleaMarketShop.Infrastructu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FleaMarketShop.Core.Entities", "FleaMarketShop.Core.Entities\FleaMarketShop.Core.Entities.csproj", "{95800326-EA3B-4C32-AE37-1D665C7E7168}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestCore", "TestCore\TestCore.csproj", "{95056D40-7504-44FC-B8D7-2987EA50F29E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{95800326-EA3B-4C32-AE37-1D665C7E7168}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{95800326-EA3B-4C32-AE37-1D665C7E7168}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{95800326-EA3B-4C32-AE37-1D665C7E7168}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95056D40-7504-44FC-B8D7-2987EA50F29E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95056D40-7504-44FC-B8D7-2987EA50F29E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95056D40-7504-44FC-B8D7-2987EA50F29E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95056D40-7504-44FC-B8D7-2987EA50F29E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
