@@ -15,10 +15,6 @@ namespace FleaMarketShop.Core.ApplicationService
 
         List<Product> GetAllProducts();
 
-        Product GetProductById(int productId);
-
-        Product GetProductByIdIncludeCategory(int productId);
-
-
+        Product GetProductById(int productId);      
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FleaMarketShop.Core.DomainService;
 using FleaMarketShop.Core.Entities;
@@ -19,7 +18,7 @@ namespace FleaMarketShop.Infrastructure.Data.Repositories
         // Creates a product
         public Product CreateProduct(Product product)
         {
-            //if (product.Categories != null) _ctx.Attach(product.Categories);
+            if (product.Category != null) _ctx.Attach(product.Category);
             var _product = _ctx.Products.Add(product).Entity;
             _ctx.SaveChanges();
             return _product;
@@ -41,14 +40,6 @@ namespace FleaMarketShop.Infrastructure.Data.Repositories
         public Product GetProductById(int productId)
         {
             return _ctx.Products.FirstOrDefault(p => p.ProductId == productId);
-        }
-
-        //Get the product by id, and includes the category.
-        public Product GetProductByIdIncludeCategory(int productId)
-        {
-            return _ctx.Products
-                       //.Include(p => p.Categories)
-                       .FirstOrDefault(p => p.ProductId == productId);
         }
 
         //update product

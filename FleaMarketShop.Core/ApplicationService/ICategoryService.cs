@@ -17,6 +17,5 @@ namespace FleaMarketShop.Core.ApplicationService
         Category GetCategoryById(int categoryId);
 
         Category GetCategoryByIdIncludeProducts(int categoryId);
-
     }
 }

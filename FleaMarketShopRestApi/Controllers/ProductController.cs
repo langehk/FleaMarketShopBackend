@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using FleaMarketShop.Core.ApplicationService;
 using FleaMarketShop.Core.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -29,7 +27,7 @@ namespace FleaMarketShopRestApi.Controllers
         }
 
         // GET api/product/5
-        [Authorize]
+        //[Authorize]
         [HttpGet("{id}")]
         public ActionResult<Product> Get(int id)
         {

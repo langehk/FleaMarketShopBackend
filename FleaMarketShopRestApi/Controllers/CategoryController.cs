@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using FleaMarketShop.Core.ApplicationService;
 using FleaMarketShop.Core.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -29,11 +27,12 @@ namespace FleaMarketShopRestApi.Controllers
         }
 
         // GET api/category/5
-        [Authorize]
+        //[Authorize]
         [HttpGet("{id}")]
         public ActionResult<Category> Get(int id)
         {
-            return _categoryService.GetCategoryById(id);
+            return _categoryService.GetCategoryByIdIncludeProducts(id);
+            //return _categoryService.GetCategoryById(id);
         }
 
         // POST api/category
