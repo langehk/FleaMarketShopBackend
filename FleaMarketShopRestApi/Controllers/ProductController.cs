@@ -31,7 +31,8 @@ namespace FleaMarketShopRestApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<Product> Get(int id)
         {
-            return _productService.GetProductById(id);
+            return _productService.GetProductByIdIncludeImages(id);
+            //return _productService.GetProductById(id);
         }
 
         // POST api/product

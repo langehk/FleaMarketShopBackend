@@ -33,7 +33,12 @@ namespace FleaMarketShop.Core.ApplicationService.Implementations
         public Product GetProductById(int productId)
         {
             return _productRepository.GetProductById(productId);
-        }      
+        }
+
+        public Product GetProductByIdIncludeImages(int productId)
+        {
+           return _productRepository.GetProductByIdIncludeImages(productId);
+        }
 
         public Product UpdateProduct(Product productUpdate)
         {
