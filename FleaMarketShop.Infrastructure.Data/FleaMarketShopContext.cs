@@ -12,6 +12,7 @@ namespace FleaMarketShop.Infrastructure.Data
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<ProductImage> ProductImages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,6 +24,16 @@ namespace FleaMarketShop.Infrastructure.Data
             modelBuilder.Entity<Category>()
                 .HasMany(o => o.Products)
                 .WithOne(c => c.Category)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<Product>()
+                .HasMany(p => p.Images)
+                .WithOne(i => i.product)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            modelBuilder.Entity<ProductImage>()
+                .HasOne(p => p.product)
+                .WithMany(i => i.Images)
                 .OnDelete(DeleteBehavior.SetNull);
         }
     }
