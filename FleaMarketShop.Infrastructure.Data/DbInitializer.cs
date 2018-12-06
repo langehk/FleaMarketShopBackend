@@ -31,15 +31,13 @@ namespace FleaMarketShop.Infrastructure.Data
             var product1 = ctx.Products.Add(new Product
             {
                 ProductName = "Stol",
-                ProductPrice = 1234,
-                ProductDescription = "test"
+                ProductPrice = 1234
             }).Entity;
 
             var product2 = ctx.Products.Add(new Product
             {
                 ProductName = "Bord",
-                ProductPrice = 4444,
-                ProductDescription = "test"
+                ProductPrice = 4444
             }).Entity;
 
 
