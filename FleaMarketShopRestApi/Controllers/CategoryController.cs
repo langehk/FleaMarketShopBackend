@@ -23,7 +23,15 @@ namespace FleaMarketShopRestApi.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Category>> Get()
         {
-            return _categoryService.GetAllCategories().ToList();        
+            try
+            {
+                return Ok(_categoryService.GetAllCategories().ToList()); 
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+                   
         }
 
         // GET api/category/5
@@ -31,8 +39,14 @@ namespace FleaMarketShopRestApi.Controllers
         [HttpGet("{id}")]
         public ActionResult<Category> Get(int id)
         {
-            return _categoryService.GetCategoryByIdIncludeProducts(id);
-            //return _categoryService.GetCategoryById(id);
+            try
+            {
+                return Ok(_categoryService.GetCategoryByIdIncludeProducts(id));
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // POST api/category
@@ -40,7 +54,15 @@ namespace FleaMarketShopRestApi.Controllers
         [HttpPost]
         public ActionResult<Category> Post([FromBody]Category category)
         {
-            return _categoryService.CreateCategory(category);
+            try
+            {
+                return Ok(_categoryService.CreateCategory(category));
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
         // PUT api/category/5
@@ -48,7 +70,15 @@ namespace FleaMarketShopRestApi.Controllers
         [HttpPut("{id}")]
         public ActionResult<Category> Put(int id, [FromBody] Category category)
         {
-            return _categoryService.UpdateCategory(category);
+            try
+            {
+                return _categoryService.UpdateCategory(category);
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
         // DELETE api/category/5
@@ -56,7 +86,15 @@ namespace FleaMarketShopRestApi.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Category> Delete(int id)
         {
-           return _categoryService.DeleteCategory(id);
+            try
+            {
+                return Ok(_categoryService.DeleteCategory(id));
+            }
+            catch (System.Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+           
         }
     }
 }

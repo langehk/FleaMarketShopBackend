@@ -32,9 +32,14 @@ namespace FleaMarketShop.Infrastructure.Data.Repositories
             return productDelete;
         }
         //Returns all products
-        public IEnumerable<Product> GetAllProducts()
+        public IEnumerable<Product> GetAllProducts(Filter filter)
         {
-            return _ctx.Products;
+            if (filter.CurrentPage == 0 && filter.ItemsPrPage == 0)
+            {
+                return _ctx.Products;
+            }
+            return _ctx.Products.Skip((filter.CurrentPage - 1) * filter.ItemsPrPage).Take(filter.ItemsPrPage);
+
         }
         //Get the product by id
         public Product GetProductById(int productId)

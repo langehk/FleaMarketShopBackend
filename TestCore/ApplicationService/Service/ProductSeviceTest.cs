@@ -19,13 +19,15 @@ namespace TestCore.ApplicationService.Service
             var productRepo = new Mock<IProductRepository>();
             var categoryRepo = new Mock<ICategoryRepository>();
 
-            IProductService productService = new ProductService(productRepo.Object);
+            IProductService productService = new ProductService(productRepo.Object, categoryRepo.Object);
 
             var product = new Product()
             {
                 ProductId = 1,
                 ProductName = "Test",
-                ProductPrice = 1234
+                ProductPrice = 1234,
+                ProductDescription = "test",
+                MainPictureString = "test"
             };
 
             var isCalled = false;
@@ -38,24 +40,31 @@ namespace TestCore.ApplicationService.Service
         }
 
 
-        //[Fact]
-        //public void ReadProductByIdIsLowerThanOneThrowException()
-        //{
-        //    var productRepo = new Mock<IProductRepository>();
-        //    var categoryRepo = new Mock<ICategoryRepository>();
+        [Fact]
+        public void GetByIdIsBelowZero()
+        {
+            var productRepo = new Mock<IProductRepository>();
+            var categoryRepo = new Mock<ICategoryRepository>();
 
-        //    IProductService product = new ProductService(productRepo.Object);
 
-        //    var product = new Product()
-        //    {
-        //        ProductId = 0,
-        //        ProductName = "test"
-        //    };
+            IProductService productService = new ProductService(productRepo.Object, categoryRepo.Object);
 
-        //    Exception e = Assert.Throws<InvalidDataException>(() =>
-        //                     ProductService.GetProductById(product.ProductId));
 
-        //    Assert.Equal("Enter an Id that is at least 1", e.Message);
-        //}
+            var product = new Product()
+            {
+                ProductId = -1,
+                ProductName = "test",
+                ProductPrice = 1234,
+                ProductDescription = "test",
+                MainPictureString = "test"
+            };
+
+            Exception e = Assert.Throws<InvalidDataException>(() =>
+                productService.GetProductById(product.ProductId));
+
+            Assert.Equal("Enter an Id that is at least 1", e.Message);
+        }
+
+
     }
 }
