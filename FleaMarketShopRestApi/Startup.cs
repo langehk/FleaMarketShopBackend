@@ -82,7 +82,8 @@ namespace FleaMarketShopRestApi
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductRepository, ProductRepository>();
 
-
+            services.AddScoped<IProductImageService, ProductImageService>();
+            services.AddScoped<IProductImageRepository, ProductImageRepository>();
             // Ensures that references wont loop. "Reference loop handling"
             services.AddMvc().AddJsonOptions(options =>
             {
@@ -124,6 +125,8 @@ namespace FleaMarketShopRestApi
                 var dbContext = services.GetService<FleaMarketShopContext>();
                 var dbInitializer = services.GetService<IDbInitializer>();
                 dbInitializer.Initialize(dbContext);
+                
+
             }
 
             // For convenience, I want detailed exception information always. However, this statement should
