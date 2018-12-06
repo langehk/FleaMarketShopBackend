@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <PackageReference Include="Moq" Version="4.10.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ApplicationService\" />
+    <Folder Include="ApplicationService\Service\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FleaMarketShop.Core\FleaMarketShop.Core.csproj" />
+    <ProjectReference Include="..\FleaMarketShop.Core.Entities\FleaMarketShop.Core.Entities.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ApplicationService\Service\ProductServiceTest.cs" />
+  </ItemGroup>
+</Project>
