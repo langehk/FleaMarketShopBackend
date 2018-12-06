@@ -20,9 +20,20 @@ namespace FleaMarketShop.Core.ApplicationService.Implementations
 
         public Product CreateProduct(Product product)
         {
+            //ProductName
             if (string.IsNullOrEmpty(product.ProductName))
             {
                 throw new InvalidDataException("Can not create a product without a name");
+            }
+            //ProductPrice
+            else if (product.ProductPrice <= 0)
+            {
+                throw new InvalidDataException("Can not create a product without a price");
+            }
+            //ProductDescription
+            else if (string.IsNullOrEmpty(product.ProductDescription))
+            {
+                throw new InvalidDataException("Can not create a product without a description");
             }
 
             return _productRepository.CreateProduct(product);
