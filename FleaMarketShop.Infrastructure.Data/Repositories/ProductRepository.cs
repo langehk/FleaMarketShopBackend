@@ -47,6 +47,13 @@ namespace FleaMarketShop.Infrastructure.Data.Repositories
             return _ctx.Products.FirstOrDefault(p => p.ProductId == productId);
         }
 
+        public Product GetProductByIdIncludeImages(int productId)
+        {
+            return _ctx.Products
+                .Include(p => p.Images)
+                .FirstOrDefault(p => p.ProductId == productId);          
+        }
+
         //update product
         public Product UpdateProduct(Product productUpdate)
         {

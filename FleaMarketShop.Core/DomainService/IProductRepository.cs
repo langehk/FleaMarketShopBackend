@@ -16,5 +16,7 @@ namespace FleaMarketShop.Core.DomainService
         IEnumerable<Product> GetAllProducts(Filter filter);
 
         Product GetProductById(int productId);
+
+        Product GetProductByIdIncludeImages(int productId);
     }
 }

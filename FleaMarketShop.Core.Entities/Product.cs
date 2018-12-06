@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace FleaMarketShop.Core.Entities
 {
@@ -11,5 +10,6 @@ namespace FleaMarketShop.Core.Entities
         public string ProductDescription { get; set; }
         public Category Category { get; set; }
         public string MainPictureString { get; set; }
+        public List<ProductImage> Images { get; set; }
     }
 }
