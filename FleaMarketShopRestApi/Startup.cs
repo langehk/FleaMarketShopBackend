@@ -84,6 +84,7 @@ namespace FleaMarketShopRestApi
 
             services.AddScoped<IProductImageService, ProductImageService>();
             services.AddScoped<IProductImageRepository, ProductImageRepository>();
+
             // Ensures that references wont loop. "Reference loop handling"
             services.AddMvc().AddJsonOptions(options =>
             {
