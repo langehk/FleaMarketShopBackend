@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using FleaMarketShop.Core.DomainService;
 using FleaMarketShop.Core.Entities;
@@ -17,6 +18,12 @@ namespace FleaMarketShop.Core.ApplicationService.Implementations
 
         public Category CreateCategory(Category category)
         {
+            //Category name
+            if (string.IsNullOrEmpty(category.CategoryName))
+            {
+                throw new InvalidDataException("Can not create a category without a name");
+            }
+
             return _categoryRepository.CreateCategory(category);
         }
 
@@ -32,6 +39,14 @@ namespace FleaMarketShop.Core.ApplicationService.Implementations
 
         public Category GetCategoryById(int categoryId)
         {
+            if (categoryId <=0)
+            {
+                throw new InvalidDataException("Enter an Id that is a least 1");
+            }
+            if (_categoryRepository.GetCategoryById(categoryId) == null)
+            {
+                throw new Exception("Could not find any Category with the entered id");
+            }
             return _categoryRepository.GetCategoryById(categoryId);
         }
 

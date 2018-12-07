@@ -64,7 +64,7 @@ namespace FleaMarketShop.Core.ApplicationService.Implementations
 
             if (_productRepository.GetProductById(productId) == null)
             {
-                throw new Exception("Could not find any User with the entered id");
+                throw new Exception("Could not find any Product with the entered id");
             }
 
             return _productRepository.GetProductById(productId);
