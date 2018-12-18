@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using FleaMarketShop.Core.Entities;
 using Microsoft.EntityFrameworkCore.Internal;
 
@@ -16,11 +15,8 @@ namespace FleaMarketShop.Infrastructure.Data
         }
 
         public void Initialize(FleaMarketShopContext ctx)
-        {
-
-            //make sure that the environment database is deleted and created.
-
-            ctx.Database.EnsureDeleted();
+        {          
+            //ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
 
             if (ctx.Products.Any() || ctx.Categories.Any() || ctx.Users.Any())
@@ -33,30 +29,30 @@ namespace FleaMarketShop.Infrastructure.Data
                 CategoryName = "Inventar"
             }).Entity;
 
-            var category2 = ctx.Categories.Add(new Category
+            Category category2 = ctx.Categories.Add(new Category
             {
                 CategoryName = "Have"
             }).Entity;
 
-            var product1 = ctx.Products.Add(new Product
+            Product product1 = ctx.Products.Add(new Product
             {
                 ProductName = "Stol",
                 ProductPrice = 1234,
                 ProductDescription = "Sven's yndlingsstol",
                 Category = category1,
-                MainPictureString = "https://thechive.files.wordpress.com/2017/06/women-in-these-countries-love-american-men-14-photos-27.jpg?quality=85&strip=info&w=600,"
+                MainPictureString = ""
             }).Entity;
 
-            var product2 = ctx.Products.Add(new Product
+            Product product2 = ctx.Products.Add(new Product
             {
                 ProductName = "Bord",
                 ProductPrice = 4444,
                 ProductDescription = "hejsa",
                 Category = category1,
-                MainPictureString = "www.dr.dk"
+                MainPictureString = ""
             }).Entity;
 
-            // Create two users with hashed and salted passwords
+            // Opretter 2 brugere med hashed og salted passwords
             string password = "1234";
             byte[] passwordHashJoe, passwordSaltJoe, passwordHashAnn, passwordSaltAnn;
             authenticationHelper.CreatePasswordHash(password, out passwordHashJoe, out passwordSaltJoe);
@@ -81,7 +77,5 @@ namespace FleaMarketShop.Infrastructure.Data
             ctx.Users.AddRange(users);
             ctx.SaveChanges();
         }
-
-
     }
 }

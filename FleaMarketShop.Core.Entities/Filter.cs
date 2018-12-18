@@ -1,5 +1,4 @@
-﻿using System;
-namespace FleaMarketShop.Core.Entities
+﻿namespace FleaMarketShop.Core.Entities
 {
     public class Filter
     {
