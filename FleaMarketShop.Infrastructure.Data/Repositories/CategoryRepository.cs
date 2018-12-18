@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using FleaMarketShop.Core.DomainService;
 using FleaMarketShop.Core.Entities;
@@ -49,7 +48,7 @@ namespace FleaMarketShop.Infrastructure.Data.Repositories
         public Category GetCategoryByIdIncludeProducts(int categoryId)
         {
             return _ctx.Categories
-                       //.Include(c => c.Products)
+                       .Include(c => c.Products)
                        .FirstOrDefault(c => c.CategoryId == categoryId);
         }
         //Update category

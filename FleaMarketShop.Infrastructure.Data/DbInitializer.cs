@@ -20,7 +20,7 @@ namespace FleaMarketShop.Infrastructure.Data
 
             //make sure that the environment database is deleted and created.
 
-            //ctx.Database.EnsureDeleted();
+            ctx.Database.EnsureDeleted();
             ctx.Database.EnsureCreated();
 
             if (ctx.Products.Any() || ctx.Categories.Any() || ctx.Users.Any())
@@ -28,30 +28,32 @@ namespace FleaMarketShop.Infrastructure.Data
                 return;
             }
 
-            var product1 = ctx.Products.Add(new Product
-            {
-                ProductName = "Stol",
-                ProductPrice = 1234
-            }).Entity;
-
-            var product2 = ctx.Products.Add(new Product
-            {
-                ProductName = "Bord",
-                ProductPrice = 4444
-            }).Entity;
-
-
-
             var category1 = ctx.Categories.Add(new Category
             {
                 CategoryName = "Inventar"
             }).Entity;
 
-
-
             var category2 = ctx.Categories.Add(new Category
             {
                 CategoryName = "Have"
+            }).Entity;
+
+            var product1 = ctx.Products.Add(new Product
+            {
+                ProductName = "Stol",
+                ProductPrice = 1234,
+                ProductDescription = "Sven's yndlingsstol",
+                Category = category1,
+                MainPictureString = "https://thechive.files.wordpress.com/2017/06/women-in-these-countries-love-american-men-14-photos-27.jpg?quality=85&strip=info&w=600,"
+            }).Entity;
+
+            var product2 = ctx.Products.Add(new Product
+            {
+                ProductName = "Bord",
+                ProductPrice = 4444,
+                ProductDescription = "hejsa",
+                Category = category1,
+                MainPictureString = "www.dr.dk"
             }).Entity;
 
             // Create two users with hashed and salted passwords

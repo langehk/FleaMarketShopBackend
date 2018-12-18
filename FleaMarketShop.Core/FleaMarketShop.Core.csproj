@@ -4,11 +4,6 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Folder Include="ApplicationService\" />
-    <Folder Include="DomainService\" />
-    <Folder Include="ApplicationService\Implementations\" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\FleaMarketShop.Core.Entities\FleaMarketShop.Core.Entities.csproj" />
   </ItemGroup>
   <ItemGroup>

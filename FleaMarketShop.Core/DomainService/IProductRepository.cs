@@ -13,11 +13,10 @@ namespace FleaMarketShop.Core.DomainService
 
         Product UpdateProduct(Product productUpdate);
 
-        IEnumerable<Product> GetAllProducts();
+        IEnumerable<Product> GetAllProducts(Filter filter);
 
         Product GetProductById(int productId);
 
-        Product GetProductByIdIncludeCategory(int productId);
-
+        Product GetProductByIdIncludeImages(int productId);
     }
 }

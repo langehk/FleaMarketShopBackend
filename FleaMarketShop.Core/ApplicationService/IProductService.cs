@@ -13,12 +13,10 @@ namespace FleaMarketShop.Core.ApplicationService
 
         Product UpdateProduct(Product productUpdate);
 
-        List<Product> GetAllProducts();
+        List<Product> GetAllProducts(Filter filter);
 
         Product GetProductById(int productId);
 
-        Product GetProductByIdIncludeCategory(int productId);
-
-
+        Product GetProductByIdIncludeImages(int productId);
     }
 }

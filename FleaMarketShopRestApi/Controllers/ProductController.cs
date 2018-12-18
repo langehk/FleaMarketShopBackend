@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using FleaMarketShop.Core.ApplicationService;
 using FleaMarketShop.Core.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -23,17 +22,25 @@ namespace FleaMarketShopRestApi.Controllers
 
         // GET: api/product
         [HttpGet]
-        public ActionResult<IEnumerable<Product>> Get()
+        public ActionResult<IEnumerable<Product>> Get([FromQuery] Filter filter)
         {
-            return _productService.GetAllProducts().ToList();
+            try
+            {
+                return Ok(_productService.GetAllProducts(filter).ToList());
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
         // GET api/product/5
-        [Authorize]
+        //[Authorize]
         [HttpGet("{id}")]
         public ActionResult<Product> Get(int id)
         {
-            return _productService.GetProductById(id);
+            return _productService.GetProductByIdIncludeImages(id);
+            //return _productService.GetProductById(id);
         }
 
         // POST api/product
@@ -41,7 +48,15 @@ namespace FleaMarketShopRestApi.Controllers
         [HttpPost]
         public ActionResult<Product> Post([FromBody]Product product)
         {
-            return _productService.CreateProduct(product);
+            try
+            {
+                return Ok(_productService.CreateProduct(product));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
         // PUT api/product/5
@@ -49,7 +64,16 @@ namespace FleaMarketShopRestApi.Controllers
         [HttpPut("{id}")]
         public ActionResult<Product> Put(int id, [FromBody]Product product)
         {
-            return _productService.UpdateProduct(product);
+
+            try
+            {
+                return Ok(_productService.UpdateProduct(product));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
 
         // DELETE api/product/5
@@ -57,7 +81,15 @@ namespace FleaMarketShopRestApi.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Product> Delete(int id)
         {
-            return _productService.DeleteProduct(id);
+            try
+            {
+                return Ok(_productService.DeleteProduct(id));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
     }
 }
