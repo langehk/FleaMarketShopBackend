@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using FleaMarketShop.Core.DomainService;
 using FleaMarketShop.Core.Entities;
 using Microsoft.EntityFrameworkCore;

@@ -36,9 +36,7 @@ namespace FleaMarketShopRestApi
                 _conf = builder.Build();
         }
 
-
-
-        // This method gets called by the runtime. Use this method to add services to the container.
+       // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             Byte[] secretBytes = new byte[40];
@@ -69,9 +67,7 @@ namespace FleaMarketShopRestApi
                   builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
             });
 
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
 
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddScoped<ICategoryService, CategoryService>();
@@ -107,10 +103,6 @@ namespace FleaMarketShopRestApi
             // Register database initializer
             services.AddTransient<IDbInitializer, DbInitializer>();
 
-            // Register the AuthenticationHelper in the helpers folder for dependency
-            // injection. It must be registered as a singleton service. The AuthenticationHelper
-            // is instantiated with a parameter. The parameter is the previously created
-            // "secretBytes" array, which is used to generate a key for signing JWT tokens,
             services.AddSingleton<IAuthenticationHelper>(new AuthenticationHelper(secretBytes));
         }
 
@@ -128,11 +120,7 @@ namespace FleaMarketShopRestApi
                 dbInitializer.Initialize(dbContext);
                 
 
-            }
-
-            // For convenience, I want detailed exception information always. However, this statement should
-            // be removed, when the application is released.
-            app.UseDeveloperExceptionPage();
+            }          
 
             if (env.IsDevelopment())
             {
@@ -143,8 +131,7 @@ namespace FleaMarketShopRestApi
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
-            //app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseHttpsRedirection();            
             app.UseCors("AllowAllOrigins");
             app.UseAuthentication();
             app.UseMvc();
