@@ -7,5 +7,4 @@ install:
 
 script:
  - dotnet build
- - dotnet test FleaMarketShopBackend/TestCore.TestCore.csproj
- 
+ - dotnet test FleaMarketShopBackend/TestCore
